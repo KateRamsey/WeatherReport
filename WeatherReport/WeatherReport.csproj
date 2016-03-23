@@ -62,7 +62,7 @@
     <Compile Include="DisplayLocation.cs" />
     <Compile Include="Forecastday.cs" />
     <Compile Include="Image.cs" />
-    <Compile Include="LoctionWeather.cs" />
+    <Compile Include="LocationWeather.cs" />
     <Compile Include="MoonPhase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

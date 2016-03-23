@@ -5,7 +5,7 @@ namespace WeatherReport
         public Image image { get; set; }
         public DisplayLocation display_location { get; set; }
         public ObservationLocation observation_location { get; set; }
-        public Estimated estimated { get; set; }
+
         public string station_id { get; set; }
         public string observation_time { get; set; }
         public string observation_time_rfc822 { get; set; }

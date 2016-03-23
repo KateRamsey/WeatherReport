@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace WeatherReport
 {
-    public class LoctionWeather
+    public class LocationWeather
     {
         public CurrentObservation current_observation { get; set; }
         public Forecast forecast { get; set; }
