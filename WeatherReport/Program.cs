@@ -24,8 +24,9 @@ namespace WeatherReport
             var response = client.Execute<LocationWeather>(request);
 
 
-            Console.WriteLine($"At Zip Code {Zip} it feels like {response.Data.current_observation.feelslike_string}");
- 
+            Console.WriteLine($"At Zip Code {Zip} ({response.Data.current_observation.display_location.city}," +
+                              $" {response.Data.current_observation.display_location.state})" +
+                              $" it feels like {response.Data.current_observation.feelslike_string}");
 
 
             Console.ReadLine();
