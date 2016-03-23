@@ -2,7 +2,6 @@ namespace WeatherReport
 {
     public class CurrentObservation
     {
-        public Image image { get; set; }
         public DisplayLocation display_location { get; set; }
         public ObservationLocation observation_location { get; set; }
 
