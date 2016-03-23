@@ -15,7 +15,7 @@ namespace WeatherReport
             //TODO: Database
 
 
-            int Zip = 0;
+            string Zip = "0";
             string APIkey = "4815a8bfa3e118cb";
             Console.WriteLine("What location would you like to get the weather for?");
             string ZipCodeRegEx = "^([0-9]{5})$";
@@ -24,14 +24,14 @@ namespace WeatherReport
             //TODO: better user input check
             if (userInput == ZipCodeRegEx)
             {
-                Zip = Int32.Parse(userInput);
+                Zip = userInput;
             }
 
             var client = new RestClient($"http://api.wunderground.com/api/{APIkey}");
             RestRequest request;
 
 
-            if (Zip != 0)
+            if (Zip != "0")
             {
                 request = new RestRequest(
                    $"conditions/forecast10day/astronomy/alerts/currenthurricane/q/{Zip}.json", Method.GET);
