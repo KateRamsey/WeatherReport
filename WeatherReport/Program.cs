@@ -19,32 +19,12 @@ namespace WeatherReport
             string Zip = "0";
             string APIkey = "4815a8bfa3e118cb";
             Console.WriteLine("What location would you like to get the weather for?");
-            string ZipCodeRegEx = "^([0-9]{5})$";
+
             string userInput = Console.ReadLine();
 
-            WUGLookup wuglookup = new WUGLookup(userInput);
-
-            //TODO: better user input check
-            if (userInput == ZipCodeRegEx)
-            {
-                Zip = userInput;
-            }
-
-            var client = new RestClient($"http://api.wunderground.com/api/{APIkey}");
-            RestRequest request;
+            ILookup lookup = new WUGLookup(userInput);
 
 
-            if (Zip != "0")
-            {
-                request = new RestRequest(
-                   $"conditions/forecast10day/astronomy/alerts/currenthurricane/q/{Zip}.json", Method.GET);
-            }
-            else
-            {
-                request = new RestRequest($"conditions/forecast10day/astronomy/alerts/currenthurricane/q/{userInput}.json", Method.GET);
-            }
-            var response = client.Execute<LocationWeather>(request);
-            var LocalWeatherInfo = response.Data;
             WeatherReportPrinter weatherReportPrinter = new WeatherReportPrinter();
 
 
