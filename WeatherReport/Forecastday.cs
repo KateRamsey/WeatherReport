@@ -15,11 +15,19 @@
     {
         public string fahrenheit { get; set; }
         public string celsius { get; set; }
+        public override string ToString()
+        {
+            return $"{this.fahrenheit} °F";
+        }
     }
 
     public class Low
     {
         public string fahrenheit { get; set; }
         public string celsius { get; set; }
+        public override string ToString()
+        {
+            return $"{this.fahrenheit} °F";
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,11 +48,13 @@ namespace WeatherReport
 
             //TODO: Write Output Functions
             weatherReport.PrintCurrentConditions(LocalWeatherInfo);
+            Console.WriteLine();
             weatherReport.Print10DayForecast(LocalWeatherInfo);
+            Console.WriteLine();
             weatherReport.PrintSunrise(LocalWeatherInfo);
-            weatherReport.PrintSunset(LocalWeatherInfo);
-            weatherReport.PrintCurrentAlerts(LocalWeatherInfo);
-            weatherReport.PrintActiveHurricanes(LocalWeatherInfo);
+            //weatherReport.PrintSunset(LocalWeatherInfo);
+            //weatherReport.PrintCurrentAlerts(LocalWeatherInfo);
+            //weatherReport.PrintActiveHurricanes(LocalWeatherInfo);
 
             Console.ReadLine();
         }
@@ -66,19 +69,29 @@ namespace WeatherReport
                   $" it feels like {lw.current_observation.feelslike_string}");
         }
 
-        public void Print10DayForecast(LocationWeather localWeatherInfo)
+        public void Print10DayForecast(LocationWeather lw)
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"Your 10 day forecast for {lw.current_observation.display_location.city}, {lw.current_observation.display_location.state}:");
+            foreach (var d in lw.forecast.simpleforecast.forecastday)
+            {
+                Console.WriteLine($"{d.date.monthname_short} {d.date.day}, forecast: High Temp = {d.high} " +
+                                  $"Low Temp = {d.low}");
+                Console.WriteLine($"Conditions will be {d.conditions}");
+            }
         }
 
-        public void PrintSunrise(LocationWeather localWeatherInfo)
+        public void PrintSunrise(LocationWeather lw)
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"Sunrise at {lw.current_observation.display_location.city}," +
+                              $"{lw.current_observation.display_location.state} is {lw.moon_phase.sunrise.hour}" +
+                              $":{lw.moon_phase.sunrise.minute}");
         }
 
-        public void PrintSunset(LocationWeather localWeatherInfo)
+        public void PrintSunset(LocationWeather lw)
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"Sunset at {lw.current_observation.display_location.city}," +
+                     $"{lw.current_observation.display_location.state} is {lw.moon_phase.sunset.hour}" +
+                     $":{lw.moon_phase.sunset.minute}");
         }
 
         public void PrintCurrentAlerts(LocationWeather localWeatherInfo)
