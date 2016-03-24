@@ -4,7 +4,7 @@ using RestSharp;
 
 namespace WeatherReport
 {
-    interface ILookup
+    public interface ILookup
     {
         WeatherInfo LookUp(string userinput);
     }
