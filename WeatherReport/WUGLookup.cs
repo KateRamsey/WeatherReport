@@ -5,8 +5,7 @@ namespace WeatherReport
 {
     interface ILookup
     {
-        WeatherInfo LookupByZIP();
-        WeatherInfo LookupByCityState();
+        WeatherInfo LookUp();
     }
 
     public class WUGLookup : ILookup
@@ -34,7 +33,7 @@ namespace WeatherReport
         }
 
 
-        public WeatherInfo LookupByZIP()
+        private WeatherInfo LookupByZIP()
         {
 
             var client = new RestClient($"http://api.wunderground.com/api/{APIkey}");
@@ -55,7 +54,7 @@ namespace WeatherReport
             return zipWeatherInfo;
         }
 
-        public WeatherInfo LookupByCityState()
+        private WeatherInfo LookupByCityState()
         {
             WeatherInfo zipWeatherInfo;
 
