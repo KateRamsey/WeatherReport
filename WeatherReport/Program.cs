@@ -25,11 +25,11 @@ namespace WeatherReport
             weatherReportPrinter.PrintCurrentConditions(weather);
             Console.WriteLine();
             weatherReportPrinter.Print10DayForecast(weather);
-            //Console.WriteLine();
-            //weatherReportPrinter.PrintSunrise(LocalWeatherInfo);
-            //weatherReportPrinter.PrintSunset(LocalWeatherInfo);
-            //Console.WriteLine();
-            //weatherReportPrinter.PrintCurrentAlerts(LocalWeatherInfo);
+            Console.WriteLine();
+            weatherReportPrinter.PrintSunrise(weather);
+            weatherReportPrinter.PrintSunset(weather);
+            Console.WriteLine();
+            weatherReportPrinter.PrintCurrentAlerts(weather);
             //weatherReportPrinter.PrintActiveHurricanes(LocalWeatherInfo);
 
             Console.ReadLine();

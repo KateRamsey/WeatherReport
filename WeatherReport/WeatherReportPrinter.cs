@@ -19,29 +19,25 @@ namespace WeatherReport
             }
         }
 
-        public void PrintSunrise(LocationWeather lw)
+        public void PrintSunrise(WeatherInfo lw)
         {
-            Console.WriteLine($"Sunrise at {lw.current_observation.display_location.city}, " +
-                              $"{lw.current_observation.display_location.state} is {lw.moon_phase.sunrise.hour}" +
-                              $":{lw.moon_phase.sunrise.minute}");
+            Console.WriteLine($"Sunrise at {lw.City}, {lw.State} is {lw.SunriseHour}:{lw.SunriseMinute}");
         }
 
-        public void PrintSunset(LocationWeather lw)
+        public void PrintSunset(WeatherInfo lw)
         {
-            Console.WriteLine($"Sunset at {lw.current_observation.display_location.city}, " +
-                              $"{lw.current_observation.display_location.state} is {lw.moon_phase.sunset.hour}" +
-                              $":{lw.moon_phase.sunset.minute}");
+            Console.WriteLine($"Sunset at {lw.City}, {lw.State} is {lw.SunsetHour}:{lw.SunsetMinute}");
         }
 
-        public void PrintCurrentAlerts(LocationWeather lw)
+        public void PrintCurrentAlerts(WeatherInfo lw)
         {
-            Console.WriteLine($"Current Alerts in {lw.current_observation.display_location.city}, {lw.current_observation.display_location.state_name}:");
-            if (lw.alerts.Count !=0)
+            Console.WriteLine($"Current Alerts in {lw.City}, {lw.State}:");
+            if (lw.Alerts.Count !=0)
             {
-                foreach (var a in lw.alerts)
+                foreach (var a in lw.Alerts)
                 {
-                    Console.WriteLine($"{a.description}, Expires at: {a.expires}");
-                    Console.WriteLine(a.message);
+                    Console.WriteLine($"{a.Description}, Expires at: {a.Expires}");
+                    Console.WriteLine(a.Message);
                 }
             }
             else
