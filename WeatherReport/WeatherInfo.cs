@@ -4,6 +4,11 @@ namespace WeatherReport
 {
     public class WeatherInfo
     {
+        public WeatherInfo()
+        {
+            TenDayForecast = new List<SimpleForecast>();
+            Alerts = new List<SimpleAlert>();
+        }
         public string Zip { get; set; }
         public string City { get; set; }
         public string State { get; set; }
@@ -12,8 +17,8 @@ namespace WeatherReport
         public string SunsetMinute { get; set; }
         public string SunriseHour { get; set; }
         public string SunriseMinute { get; set; }
-        public virtual List<SimpleForecast> TenDayForecast { get; set; }
-        public virtual List<SimpleAlert> Alerts { get; set; }
+        public List<SimpleForecast> TenDayForecast { get; set; }
+        public List<SimpleAlert> Alerts { get; set; }
         //huricane
     }
 

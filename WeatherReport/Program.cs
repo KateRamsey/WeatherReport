@@ -22,14 +22,14 @@ namespace WeatherReport
             WeatherReportPrinter weatherReportPrinter = new WeatherReportPrinter();
 
             //TODO: change input on these functions to weather
-            weatherReportPrinter.PrintCurrentConditions(LocalWeatherInfo);
+            weatherReportPrinter.PrintCurrentConditions(weather);
             Console.WriteLine();
-            weatherReportPrinter.Print10DayForecast(LocalWeatherInfo);
-            Console.WriteLine();
-            weatherReportPrinter.PrintSunrise(LocalWeatherInfo);
-            weatherReportPrinter.PrintSunset(LocalWeatherInfo);
-            Console.WriteLine();
-            weatherReportPrinter.PrintCurrentAlerts(LocalWeatherInfo);
+            weatherReportPrinter.Print10DayForecast(weather);
+            //Console.WriteLine();
+            //weatherReportPrinter.PrintSunrise(LocalWeatherInfo);
+            //weatherReportPrinter.PrintSunset(LocalWeatherInfo);
+            //Console.WriteLine();
+            //weatherReportPrinter.PrintCurrentAlerts(LocalWeatherInfo);
             //weatherReportPrinter.PrintActiveHurricanes(LocalWeatherInfo);
 
             Console.ReadLine();

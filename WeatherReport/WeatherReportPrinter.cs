@@ -4,21 +4,18 @@ namespace WeatherReport
 {
     public class WeatherReportPrinter
     {
-        public void PrintCurrentConditions(LocationWeather lw)
+        public void PrintCurrentConditions(WeatherInfo lw)
         {
-            Console.WriteLine($"At Zip Code {lw.current_observation.display_location.zip} ({lw.current_observation.display_location.city}," +
-                              $" {lw.current_observation.display_location.state})" +
-                              $" it feels like {lw.current_observation.feelslike_string}");
+            Console.WriteLine($"At Zip Code {lw.Zip} ({lw.City}, {lw.State}) it feels like {lw.CurrentFeelsLike}");
         }
 
-        public void Print10DayForecast(LocationWeather lw)
+        public void Print10DayForecast(WeatherInfo lw)
         {
-            Console.WriteLine($"Your 10 day forecast for {lw.current_observation.display_location.city}, {lw.current_observation.display_location.state}:");
-            foreach (var d in lw.forecast.simpleforecast.forecastday)
+            Console.WriteLine($"Your 10 day forecast for {lw.City}, {lw.State}:");
+            foreach (var d in lw.TenDayForecast)
             {
-                Console.WriteLine($"{d.date.monthname_short} {d.date.day}, forecast: High Temp = {d.high} " +
-                                  $"Low Temp = {d.low}");
-                Console.WriteLine($"Conditions will be {d.conditions}");
+                Console.WriteLine($"{d.Month} {d.Day} forecast: High Temp = {d.High} Low Temp = {d.Low}");
+                Console.WriteLine($"Conditions will be {d.Condition}");
             }
         }
 
