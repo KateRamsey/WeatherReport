@@ -37,43 +37,49 @@ namespace WeatherReport
 
             var response = client.Execute<LocationWeather>(request);
             var LocalWeatherInfo = response.Data;
-
-            WeatherInfo zipWeatherInfo = new WeatherInfo
+            if (LocalWeatherInfo != null)
             {
-                Zip = LocalWeatherInfo.current_observation.display_location.zip,
-                City = LocalWeatherInfo.current_observation.display_location.city,
-                State = LocalWeatherInfo.current_observation.display_location.state,
-                CurrentFeelsLike = LocalWeatherInfo.current_observation.feelslike_string,
-                SunriseHour = LocalWeatherInfo.moon_phase.sunrise.hour,
-                SunriseMinute = LocalWeatherInfo.moon_phase.sunrise.minute,
-                SunsetHour = LocalWeatherInfo.moon_phase.sunset.hour,
-                SunsetMinute = LocalWeatherInfo.moon_phase.sunset.minute
-            };
-
-            foreach (var f in LocalWeatherInfo.forecast.simpleforecast.forecastday)
-            {
-                SimpleForecast sf = new SimpleForecast
+                WeatherInfo zipWeatherInfo = new WeatherInfo
                 {
-                    Condition = f.conditions,
-                    Day = f.date.day.ToString(),
-                    High = f.high.ToString(),
-                    Low = f.low.ToString(),
-                    Month = f.date.monthname
+                    Zip = LocalWeatherInfo.current_observation.display_location.zip,
+                    City = LocalWeatherInfo.current_observation.display_location.city,
+                    State = LocalWeatherInfo.current_observation.display_location.state,
+                    CurrentFeelsLike = LocalWeatherInfo.current_observation.feelslike_string,
+                    SunriseHour = LocalWeatherInfo.moon_phase.sunrise.hour,
+                    SunriseMinute = LocalWeatherInfo.moon_phase.sunrise.minute,
+                    SunsetHour = LocalWeatherInfo.moon_phase.sunset.hour,
+                    SunsetMinute = LocalWeatherInfo.moon_phase.sunset.minute
                 };
-                zipWeatherInfo.TenDayForecast.Add(sf);
-            }
-            foreach (var a in LocalWeatherInfo.alerts)
-            {
-                SimpleAlert sa = new SimpleAlert
-                {
-                    Description = a.description,
-                    Expires = a.expires,
-                    Message = a.message
-                };
-                zipWeatherInfo.Alerts.Add(sa);
-            }
 
-            return zipWeatherInfo;
+                foreach (var f in LocalWeatherInfo.forecast.simpleforecast.forecastday)
+                {
+                    SimpleForecast sf = new SimpleForecast
+                    {
+                        Condition = f.conditions,
+                        Day = f.date.day.ToString(),
+                        High = f.high.ToString(),
+                        Low = f.low.ToString(),
+                        Month = f.date.monthname
+                    };
+                    zipWeatherInfo.TenDayForecast.Add(sf);
+                }
+                foreach (var a in LocalWeatherInfo.alerts)
+                {
+                    SimpleAlert sa = new SimpleAlert
+                    {
+                        Description = a.description,
+                        Expires = a.expires,
+                        Message = a.message
+                    };
+                    zipWeatherInfo.Alerts.Add(sa);
+                }
+
+                return zipWeatherInfo;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         private WeatherInfo LookupByCityState(string userInput)
@@ -85,43 +91,48 @@ namespace WeatherReport
 
             var response = client.Execute<LocationWeather>(request);
             var LocalWeatherInfo = response.Data;
-
-            WeatherInfo CSWeatherInfo = new WeatherInfo
+            if (LocalWeatherInfo != null)
             {
-                Zip = LocalWeatherInfo.current_observation.display_location.zip,
-                City = LocalWeatherInfo.current_observation.display_location.city,
-                State = LocalWeatherInfo.current_observation.display_location.state,
-                CurrentFeelsLike = LocalWeatherInfo.current_observation.feelslike_string,
-                SunriseHour = LocalWeatherInfo.moon_phase.sunrise.hour,
-                SunriseMinute = LocalWeatherInfo.moon_phase.sunrise.minute,
-                SunsetHour = LocalWeatherInfo.moon_phase.sunset.hour,
-                SunsetMinute = LocalWeatherInfo.moon_phase.sunset.minute
-            };
-
-            foreach (var f in LocalWeatherInfo.forecast.simpleforecast.forecastday)
-            {
-                SimpleForecast sf = new SimpleForecast
+                WeatherInfo CSWeatherInfo = new WeatherInfo
                 {
-                    Condition = f.conditions,
-                    Day = f.date.day.ToString(),
-                    High = f.high.ToString(),
-                    Low = f.low.ToString(),
-                    Month = f.date.monthname
+                    Zip = LocalWeatherInfo.current_observation.display_location.zip,
+                    City = LocalWeatherInfo.current_observation.display_location.city,
+                    State = LocalWeatherInfo.current_observation.display_location.state,
+                    CurrentFeelsLike = LocalWeatherInfo.current_observation.feelslike_string,
+                    SunriseHour = LocalWeatherInfo.moon_phase.sunrise.hour,
+                    SunriseMinute = LocalWeatherInfo.moon_phase.sunrise.minute,
+                    SunsetHour = LocalWeatherInfo.moon_phase.sunset.hour,
+                    SunsetMinute = LocalWeatherInfo.moon_phase.sunset.minute
                 };
-                CSWeatherInfo.TenDayForecast.Add(sf);
-            }
-            foreach (var a in LocalWeatherInfo.alerts)
-            {
-                SimpleAlert sa = new SimpleAlert
-                {
-                    Description = a.description,
-                    Expires = a.expires,
-                    Message = a.message
-                };
-                CSWeatherInfo.Alerts.Add(sa);
-            }
 
-            return CSWeatherInfo;
+                foreach (var f in LocalWeatherInfo.forecast.simpleforecast.forecastday)
+                {
+                    SimpleForecast sf = new SimpleForecast
+                    {
+                        Condition = f.conditions,
+                        Day = f.date.day.ToString(),
+                        High = f.high.ToString(),
+                        Low = f.low.ToString(),
+                        Month = f.date.monthname
+                    };
+                    CSWeatherInfo.TenDayForecast.Add(sf);
+                }
+                foreach (var a in LocalWeatherInfo.alerts)
+                {
+                    SimpleAlert sa = new SimpleAlert
+                    {
+                        Description = a.description,
+                        Expires = a.expires,
+                        Message = a.message
+                    };
+                    CSWeatherInfo.Alerts.Add(sa);
+                }
+                return CSWeatherInfo;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

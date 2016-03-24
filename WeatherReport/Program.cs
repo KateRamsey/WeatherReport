@@ -22,21 +22,21 @@ namespace WeatherReport
             {
                 Console.WriteLine("That is not a valid location... please enter another");
                 userInput = Console.ReadLine();
-
+                weather = lookup.LookUp(userInput);
             }
 
             WeatherReportPrinter weatherReportPrinter = new WeatherReportPrinter();
 
-                weatherReportPrinter.PrintCurrentConditions(weather);
-                Console.WriteLine();
-                weatherReportPrinter.Print10DayForecast(weather);
-                Console.WriteLine();
-                weatherReportPrinter.PrintSunrise(weather);
-                weatherReportPrinter.PrintSunset(weather);
-                Console.WriteLine();
-                weatherReportPrinter.PrintCurrentAlerts(weather);
-                //weatherReportPrinter.PrintActiveHurricanes(weather);
-            
+            weatherReportPrinter.PrintCurrentConditions(weather);
+            Console.WriteLine();
+            weatherReportPrinter.Print10DayForecast(weather);
+            Console.WriteLine();
+            weatherReportPrinter.PrintSunrise(weather);
+            weatherReportPrinter.PrintSunset(weather);
+            Console.WriteLine();
+            weatherReportPrinter.PrintCurrentAlerts(weather);
+            //weatherReportPrinter.PrintActiveHurricanes(weather);
+
 
 
             Console.ReadLine();
