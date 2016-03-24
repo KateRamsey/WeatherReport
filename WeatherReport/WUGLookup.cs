@@ -37,7 +37,7 @@ namespace WeatherReport
 
             var response = client.Execute<LocationWeather>(request);
             var LocalWeatherInfo = response.Data;
-            if (LocalWeatherInfo != null)
+            if (LocalWeatherInfo.current_observation != null)
             {
                 WeatherInfo zipWeatherInfo = new WeatherInfo
                 {
@@ -91,7 +91,7 @@ namespace WeatherReport
 
             var response = client.Execute<LocationWeather>(request);
             var LocalWeatherInfo = response.Data;
-            if (LocalWeatherInfo != null)
+            if (LocalWeatherInfo.current_observation != null)
             {
                 WeatherInfo CSWeatherInfo = new WeatherInfo
                 {
