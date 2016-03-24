@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography.X509Certificates;
 using RestSharp;
 
 namespace WeatherReport
@@ -22,7 +23,7 @@ namespace WeatherReport
         {
             //TODO: Better RegEx and user input check
             string ZipCodeRegEx = "^([0-9]{5})$";
-            if (userInput == ZipCodeRegEx)
+            if (System.Text.RegularExpressions.Regex.IsMatch(userInput, ZipCodeRegEx))
             {
                 return this.LookupByZIP();
             }
