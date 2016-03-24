@@ -13,7 +13,7 @@ namespace WeatherReport
         public string SunriseHour { get; set; }
         public string SunriseMinute { get; set; }
         public virtual List<SimpleForecast> TenDayForecast { get; set; }
-        public virtual List<Alert> Alerts { get; set; }
+        public virtual List<SimpleAlert> Alerts { get; set; }
         //huricane
     }
 
