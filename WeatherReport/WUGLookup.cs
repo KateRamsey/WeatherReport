@@ -6,40 +6,39 @@ namespace WeatherReport
 {
     interface ILookup
     {
-        WeatherInfo LookUp();
+        WeatherInfo LookUp(string userinput);
     }
 
     public class WUGLookup : ILookup
     {
-        private string userInput;
         string APIkey = "4815a8bfa3e118cb";
 
-        public WUGLookup(string userinput)
+        public WUGLookup()
         {
-            this.userInput = userinput;
         }
 
-        public WeatherInfo LookUp()
+        public WeatherInfo LookUp(string userInput)
         {
+
             //TODO: Better RegEx and user input check
             string ZipCodeRegEx = "^([0-9]{5})$";
             if (System.Text.RegularExpressions.Regex.IsMatch(userInput, ZipCodeRegEx))
             {
-                return this.LookupByZIP();
+                return this.LookupByZIP(userInput);
             }
             else
             {
-                return this.LookupByCityState();
+                return this.LookupByCityState(userInput);
             }
         }
 
 
-        private WeatherInfo LookupByZIP()
+        private WeatherInfo LookupByZIP(string userInput)
         {
             var client = new RestClient($"http://api.wunderground.com/api/{APIkey}");
 
             var request = new RestRequest(
-                $"conditions/forecast10day/astronomy/alerts/currenthurricane/q/{this.userInput}.json", Method.GET);
+                $"conditions/forecast10day/astronomy/alerts/currenthurricane/q/{userInput}.json", Method.GET);
 
             var response = client.Execute<LocationWeather>(request);
             var LocalWeatherInfo = response.Data;
@@ -82,12 +81,12 @@ namespace WeatherReport
             return zipWeatherInfo;
         }
 
-        private WeatherInfo LookupByCityState()
+        private WeatherInfo LookupByCityState(string userInput)
         {
             var client = new RestClient($"http://api.wunderground.com/api/{APIkey}");
 
             var request = new RestRequest(
-                $"conditions/forecast10day/astronomy/alerts/currenthurricane/q/{this.userInput}.json", Method.GET);
+                $"conditions/forecast10day/astronomy/alerts/currenthurricane/q/{userInput}.json", Method.GET);
 
             var response = client.Execute<LocationWeather>(request);
             var LocalWeatherInfo = response.Data;

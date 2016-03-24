@@ -16,20 +16,28 @@ namespace WeatherReport
 
             string userInput = Console.ReadLine();
 
-            ILookup lookup = new WUGLookup(userInput);
-            WeatherInfo weather = lookup.LookUp();
+            ILookup lookup = new WUGLookup();
+            WeatherInfo weather = lookup.LookUp(userInput);
+            while (weather == null)
+            {
+                Console.WriteLine("That is not a valid location... please enter another");
+                userInput = Console.ReadLine();
+
+            }
 
             WeatherReportPrinter weatherReportPrinter = new WeatherReportPrinter();
 
-            weatherReportPrinter.PrintCurrentConditions(weather);
-            Console.WriteLine();
-            weatherReportPrinter.Print10DayForecast(weather);
-            Console.WriteLine();
-            weatherReportPrinter.PrintSunrise(weather);
-            weatherReportPrinter.PrintSunset(weather);
-            Console.WriteLine();
-            weatherReportPrinter.PrintCurrentAlerts(weather);
-            //weatherReportPrinter.PrintActiveHurricanes(weather);
+                weatherReportPrinter.PrintCurrentConditions(weather);
+                Console.WriteLine();
+                weatherReportPrinter.Print10DayForecast(weather);
+                Console.WriteLine();
+                weatherReportPrinter.PrintSunrise(weather);
+                weatherReportPrinter.PrintSunset(weather);
+                Console.WriteLine();
+                weatherReportPrinter.PrintCurrentAlerts(weather);
+                //weatherReportPrinter.PrintActiveHurricanes(weather);
+            
+
 
             Console.ReadLine();
         }

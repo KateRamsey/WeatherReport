@@ -4,14 +4,25 @@ namespace WeatherReport
 {
     public class WeatherReportPrinter
     {
+        public WeatherReportPrinter(PrintDelegate print)
+        {
+            Print = print;
+        }
+        public WeatherReportPrinter() : this(Console.WriteLine)
+        {
+        
+        }
+        public delegate void PrintDelegate(string message);
+        public PrintDelegate Print { get; set; } 
+
         public void PrintCurrentConditions(WeatherInfo lw)
         {
-            Console.WriteLine($"At Zip Code {lw.Zip} ({lw.City}, {lw.State}) it feels like {lw.CurrentFeelsLike}");
+            Print($"At Zip Code {lw.Zip} ({lw.City}, {lw.State}) it feels like {lw.CurrentFeelsLike}");
         }
 
         public void Print10DayForecast(WeatherInfo lw)
         {
-            Console.WriteLine($"Your 10 day forecast for {lw.City}, {lw.State}:");
+            Print($"Your 10 day forecast for {lw.City}, {lw.State}:");
             foreach (var d in lw.TenDayForecast)
             {
                 Console.WriteLine($"{d.Month} {d.Day} forecast: High Temp = {d.High} Low Temp = {d.Low}");
@@ -21,28 +32,28 @@ namespace WeatherReport
 
         public void PrintSunrise(WeatherInfo lw)
         {
-            Console.WriteLine($"Sunrise at {lw.City}, {lw.State} is {lw.SunriseHour}:{lw.SunriseMinute}");
+            Print($"Sunrise at {lw.City}, {lw.State} is {lw.SunriseHour}:{lw.SunriseMinute}");
         }
 
         public void PrintSunset(WeatherInfo lw)
         {
-            Console.WriteLine($"Sunset at {lw.City}, {lw.State} is {lw.SunsetHour}:{lw.SunsetMinute}");
+            Print($"Sunset at {lw.City}, {lw.State} is {lw.SunsetHour}:{lw.SunsetMinute}");
         }
 
         public void PrintCurrentAlerts(WeatherInfo lw)
         {
-            Console.WriteLine($"Current Alerts in {lw.City}, {lw.State}:");
+            Print($"Current Alerts in {lw.City}, {lw.State}:");
             if (lw.Alerts.Count !=0)
             {
                 foreach (var a in lw.Alerts)
                 {
-                    Console.WriteLine($"{a.Description}, Expires at: {a.Expires}");
-                    Console.WriteLine(a.Message);
+                    Print($"{a.Description}, Expires at: {a.Expires}");
+                    Print(a.Message);
                 }
             }
             else
             {
-                Console.WriteLine("No current alerts for this location");
+                Print("No current alerts for this location");
             }
         }
 
