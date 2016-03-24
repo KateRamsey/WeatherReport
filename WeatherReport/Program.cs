@@ -22,6 +22,8 @@ namespace WeatherReport
             string ZipCodeRegEx = "^([0-9]{5})$";
             string userInput = Console.ReadLine();
 
+            WUGLookup wuglookup = new WUGLookup(userInput);
+
             //TODO: better user input check
             if (userInput == ZipCodeRegEx)
             {
@@ -43,81 +45,20 @@ namespace WeatherReport
             }
             var response = client.Execute<LocationWeather>(request);
             var LocalWeatherInfo = response.Data;
-            WeatherReport weatherReport = new WeatherReport();
+            WeatherReportPrinter weatherReportPrinter = new WeatherReportPrinter();
 
 
-            //TODO: Write Output Functions
-            weatherReport.PrintCurrentConditions(LocalWeatherInfo);
+            weatherReportPrinter.PrintCurrentConditions(LocalWeatherInfo);
             Console.WriteLine();
-            weatherReport.Print10DayForecast(LocalWeatherInfo);
+            weatherReportPrinter.Print10DayForecast(LocalWeatherInfo);
             Console.WriteLine();
-            weatherReport.PrintSunrise(LocalWeatherInfo);
-            weatherReport.PrintSunset(LocalWeatherInfo);
+            weatherReportPrinter.PrintSunrise(LocalWeatherInfo);
+            weatherReportPrinter.PrintSunset(LocalWeatherInfo);
             Console.WriteLine();
-            weatherReport.PrintCurrentAlerts(LocalWeatherInfo);
-            //weatherReport.PrintActiveHurricanes(LocalWeatherInfo);
+            weatherReportPrinter.PrintCurrentAlerts(LocalWeatherInfo);
+            //weatherReportPrinter.PrintActiveHurricanes(LocalWeatherInfo);
 
             Console.ReadLine();
         }
     }
-
-    public class WeatherReport
-    {
-        public void PrintCurrentConditions(LocationWeather lw)
-        {
-            Console.WriteLine($"At Zip Code {lw.current_observation.display_location.zip} ({lw.current_observation.display_location.city}," +
-                  $" {lw.current_observation.display_location.state})" +
-                  $" it feels like {lw.current_observation.feelslike_string}");
-        }
-
-        public void Print10DayForecast(LocationWeather lw)
-        {
-            Console.WriteLine($"Your 10 day forecast for {lw.current_observation.display_location.city}, {lw.current_observation.display_location.state}:");
-            foreach (var d in lw.forecast.simpleforecast.forecastday)
-            {
-                Console.WriteLine($"{d.date.monthname_short} {d.date.day}, forecast: High Temp = {d.high} " +
-                                  $"Low Temp = {d.low}");
-                Console.WriteLine($"Conditions will be {d.conditions}");
-            }
-        }
-
-        public void PrintSunrise(LocationWeather lw)
-        {
-            Console.WriteLine($"Sunrise at {lw.current_observation.display_location.city}, " +
-                              $"{lw.current_observation.display_location.state} is {lw.moon_phase.sunrise.hour}" +
-                              $":{lw.moon_phase.sunrise.minute}");
-        }
-
-        public void PrintSunset(LocationWeather lw)
-        {
-            Console.WriteLine($"Sunset at {lw.current_observation.display_location.city}, " +
-                     $"{lw.current_observation.display_location.state} is {lw.moon_phase.sunset.hour}" +
-                     $":{lw.moon_phase.sunset.minute}");
-        }
-
-        public void PrintCurrentAlerts(LocationWeather lw)
-        {
-            Console.WriteLine($"Current Alerts in {lw.current_observation.display_location.city}, {lw.current_observation.display_location.state_name}:");
-            if (lw.alerts.Count !=0)
-            {
-                foreach (var a in lw.alerts)
-                {
-                    Console.WriteLine($"{a.description}, Expires at: {a.expires}");
-                    Console.WriteLine(a.message);
-                }
-            }
-            else
-            {
-                Console.WriteLine("No current alerts for this location");
-            }
-        }
-
-        public void PrintActiveHurricanes(LocationWeather localWeatherInfo)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-
-
 }
