@@ -11,15 +11,10 @@ namespace WeatherReport
 
     public class WUGLookup : ILookup
     {
-        string APIkey = "4815a8bfa3e118cb";
-
-        public WUGLookup()
-        {
-        }
+        private string APIkey = "4815a8bfa3e118cb";
 
         public WeatherInfo LookUp(string userInput)
         {
-
             //TODO: Better RegEx and user input check
             string ZipCodeRegEx = "^([0-9]{5})$";
             if (System.Text.RegularExpressions.Regex.IsMatch(userInput, ZipCodeRegEx))
