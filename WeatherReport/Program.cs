@@ -52,8 +52,9 @@ namespace WeatherReport
             weatherReport.Print10DayForecast(LocalWeatherInfo);
             Console.WriteLine();
             weatherReport.PrintSunrise(LocalWeatherInfo);
-            //weatherReport.PrintSunset(LocalWeatherInfo);
-            //weatherReport.PrintCurrentAlerts(LocalWeatherInfo);
+            weatherReport.PrintSunset(LocalWeatherInfo);
+            Console.WriteLine();
+            weatherReport.PrintCurrentAlerts(LocalWeatherInfo);
             //weatherReport.PrintActiveHurricanes(LocalWeatherInfo);
 
             Console.ReadLine();
@@ -82,21 +83,33 @@ namespace WeatherReport
 
         public void PrintSunrise(LocationWeather lw)
         {
-            Console.WriteLine($"Sunrise at {lw.current_observation.display_location.city}," +
+            Console.WriteLine($"Sunrise at {lw.current_observation.display_location.city}, " +
                               $"{lw.current_observation.display_location.state} is {lw.moon_phase.sunrise.hour}" +
                               $":{lw.moon_phase.sunrise.minute}");
         }
 
         public void PrintSunset(LocationWeather lw)
         {
-            Console.WriteLine($"Sunset at {lw.current_observation.display_location.city}," +
+            Console.WriteLine($"Sunset at {lw.current_observation.display_location.city}, " +
                      $"{lw.current_observation.display_location.state} is {lw.moon_phase.sunset.hour}" +
                      $":{lw.moon_phase.sunset.minute}");
         }
 
-        public void PrintCurrentAlerts(LocationWeather localWeatherInfo)
+        public void PrintCurrentAlerts(LocationWeather lw)
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"Current Alerts in {lw.current_observation.display_location.city}, {lw.current_observation.display_location.state_name}:");
+            if (lw.alerts.Count !=0)
+            {
+                foreach (var a in lw.alerts)
+                {
+                    Console.WriteLine($"{a.description}, Expires at: {a.expires}");
+                    Console.WriteLine(a.message);
+                }
+            }
+            else
+            {
+                Console.WriteLine("No current alerts for this location");
+            }
         }
 
         public void PrintActiveHurricanes(LocationWeather localWeatherInfo)
